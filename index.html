@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html>
+	<head>
+
+	</head>
+	<body>
+
+		<form method="POST">
+			{% csrf_token %}
+			Post Id : <input type="text" name = "id" required/><br><br>
+			User Id : <input type="text" name = "userid" required/><br><br>
+			Method Id : <input type="text" name = "methid" required/><br><br>
+			Post title : <input type="text" name = "posttitle" required/><br><br>
+			Post Description : <input type="text" name = "postdesc" required/><br><br>
+			Method Title : <input type="text" name = "methtitle" required/><br><br>
+			Method Description : <input type="text" name = "methdesc" required/><br><br>
+			Step 1 : <input type="text" name = "s1" required/><br><br>
+			Step 2 : <input type="text" name = "s2" required/><br><br>
+			Step 3 : <input type="text" name = "s3" required/><br><br>
+			Step 4 : <input type="text" name = "s4" required/><br><br>
+			Step 5 : <input type="text" name = "s5" required/><br><br>
+			Step 6 : <input type="text" name = "s6" required/><br><br>
+			Step 7 : <input type="text" name = "s7" required/><br><br>
+			Step 8 : <input type="text" name = "s8" required/><br><br>
+			Step 9 : <input type="text" name = "s9" required/><br><br>
+			Step 10 : <input type="text" name = "s10" required/><br><br>
+			Step 11 : <input type="text" name = "s11" required/><br><br>
+			Step 12 : <input type="text" name = "s12" required/><br><br>
+			Step 13 : <input type="text" name = "s13" required/><br><br>
+			Step 14 : <input type="text" name = "s14" required/><br><br>
+			Step 15 : <input type="text" name = "s15" required/><br><br>
+			Step 16 : <input type="text" name = "s16" required/><br><br>
+			Step 17 : <input type="text" name = "s17" required/><br><br>
+			Step 18 : <input type="text" name = "s18" required/><br><br>
+			Step 19 : <input type="text" name = "s19" required/><br><br>
+			Step 20 : <input type="text" name = "s20" required/><br><br>
+			Step 21 : <input type="text" name = "s21" required/><br><br>
+			Step 22 : <input type="text" name = "s22" required/><br><br>
+			Step 23 : <input type="text" name = "s23" required/><br><br>
+			Step 24 : <input type="text" name = "s24" required/><br><br>
+			Step 25 : <input type="text" name = "s25" required/><br><br>
+			<input type = "submit" value="Upload Post">
+			{%if messages %}
+				{%for message in messages %}
+					<h2 style="color:green;">
+						{{message}}
+					</h2>
+				{% endfor %}
+			{% endif %}
+		</form>
+	</body>
+</html>

@@ -1,0 +1,434 @@
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		{% load static %}
+	    #<link rel = "stylesheet" href="{% static 'css/uploadpost.css' %}">
+		<script src = {% static "js/uploadpost.js" %}> </script>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/uploadpost.css" />
+		<script src = "{{ STATIC_URL }}js/uploadpost.js"> </script>
+		#<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.3.min.js"></script>
+
+		<script src="postpage.js">
+		</script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	    <link rel="stylesheet" href="https://cdnjs. cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+	    </script>
+	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js">
+	    </script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js">
+	    </script>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	    <style>
+	        [data-toggle="collapse"][aria-expanded="false"] > .js-rotate-if-collapsed
+	        {
+	            -webkit-transform:rotate(180deg);
+	  			-webkit-transition-duration: 1s;
+	        }
+
+	    </style>
+
+		<script src="https://code.jquery.com/jquery-1.10.2.js">
+		</script>
+	</head>
+
+	<body>
+
+	<script type="text/javascript">
+		function descbuttonchange()
+		{
+	  		var x = document.getElementById("adddesc");
+
+	  		if (x.innerHTML.includes("Remove"))
+	  		{
+	  			//includes check if it's add or remove
+	    		x.innerHTML = "<i class='fas fa-plus'></i> Add Description";
+				//x.style.cssText  = "border-color: #0275d8;";
+				document.getElementById("metinput").value="";
+	  		}
+	  		else
+	  		{
+	    		x.innerHTML = "<i class='fas fa-times'></i> Remove Description";
+	    		document.getElementsById("input").value="";
+	    		//x.style.cssText  = "border-color: #c21919; color:#c21919;";
+	  		}
+		}
+
+		function notebtnchange() {
+	  		var x = document.getElementById("addnote");
+
+	  		if (x.innerHTML.includes("Remove"))
+	  		{
+	  			//includes check if it's add or remove
+	    		x.innerHTML = "<i class='fas fa-exclamation-triangle'></i> Add Note";
+				//x.style.cssText  = "border-color: #0275d8;";
+				document.getElementById("noteinput").value="";
+	  		}
+	  		else
+	  		{
+	    		x.innerHTML = "<i class='fas fa-exclamation-triangle'></i> Remove Note";
+	    		document.getElementsById("input").value="";
+	    		//x.style.cssText  = "border-color: #c21919; color:#c21919;";
+	  		}
+		}
+
+		function videobtnchange()
+		{
+	  		var x = document.getElementById("addvideo");
+
+	  		if (x.innerHTML.includes("Remove"))
+	  		{
+	  			//includes check if it's add or remove
+	    		x.innerHTML = "<i class='fab fa-youtube'></i> Add Video";
+				//x.style.cssText  = "border-color: #0275d8;";
+				document.getElementById("noteinput").value="";
+	  		}
+	  		else
+	  		{
+	    		x.innerHTML = "<i class='fab fa-youtube'></i> Remove Video";
+	    		document.getElementById("input").value="";
+			    //x.style.cssText  = "border-color: #c21919; color:#c21919;";
+			  }
+			}
+
+			function searchvideourl()
+			{
+				//var videospot = document.getElementsByClassName("videocanvas");
+				var urlinput = document.getElementById("videourlinput").value;
+
+				var videospot = document.getElementById('videocanvas');
+  				videospot.innerHTML = '<iframe src='urlinput' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+			}
+
+			function stepadd()
+			{
+	  			let menu = document.querySelector('#stepblock');
+        		let clonedMenu = menu.cloneNode(true);
+
+        		var numofsteps = document.querySelectorAll(".stepclass");
+	    		var maximumstepcount = parseInt(numofsteps.length, 10)
+
+        		clonedMenu.id = 'stepblock' + (maximumstepcount+1);
+        		document.getElementById("forsteps").appendChild(clonedMenu);
+
+        		//change step number in each repetition
+        		var changestepnumber = clonedMenu.getElementsByClassName("stepcircle")[0];
+        		changestepnumber.innerHTML = (maximumstepcount + 1);
+
+        		//change step number inside box
+        		var changestepnum = clonedMenu.getElementsByClassName("titlelabel")[0];
+       			changestepnum.innerHTML = "Step " + (maximumstepcount + 1);
+
+        		//remove any existing texts
+        		var refreshtext = clonedMenu.getElementsByClassName("inputboxes")[0];
+        		refreshtext.value = "";
+
+        		//remove any existing texts
+        		var refreshtext = clonedMenu.getElementsByClassName("inputboxes")[0];
+        		refreshtext.value = "";
+
+        		//enable removestepbutton state as active
+        		var removestepbtn = clonedMenu.getElementsByClassName("removestepbtn")[0];
+        		removestepbtn.disabled = false;
+        		removestepbtn.id = "removebuttonid" + (maximumstepcount+1);
+
+        		var element = document.getElementById("addstepbtn");
+    			//element.parentNode.removeChild(element);
+    			i++;
+			}
+
+			function removestep(elemid)
+			{
+				//id is for which step number is selected to remove
+				//elemid = "removebuttonid1"
+
+				var num = elemid.replace(/\D/g, "");
+
+				var element = document.getElementById("stepblock" + num);
+				element.parentNode.removeChild(element);
+
+	    		var numofsteps = document.querySelectorAll(".stepclass");
+	    		var maximumstepcount = parseInt(numofsteps.length, 10)
+
+
+				stepfixer();
+
+			}
+
+			function stepfixer()
+			{
+				var numofsteps = document.querySelectorAll(".stepclass");
+	   			var maximumstepcount = parseInt(numofsteps.length, 10)
+
+
+
+	    		for (j=1; j < maximumstepcount; j++)
+	    		{
+	    			numofsteps[j].id = "stepblock" + (j+1);
+
+	    			//Fixing the step display number
+	    			var newelement = numofsteps[j].getElementsByClassName("stepcircle")[0];
+            		newelement.innerHTML = j+1;
+
+	    			//Fixing the remove button id
+            		var changebuttonid = numofsteps[j].querySelector(".removestepbtn");
+          			changebuttonid.id = "removebuttonid" + (j+1);
+
+	    			//Fixing the step number inside input
+          			var changeinnerstep = numofsteps[j].querySelector(".titlelabel");
+          			changeinnerstep.innerHTML = "Step " + (j+1);
+	    			//alert("numofsteps[j].id")
+				}
+			}
+
+
+		</script>
+
+
+		{% include 'nav.html' %}
+
+
+		<div class="container-fluid">
+      		<div class="row">
+        		<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          			<div class="sidebar position-fixed">
+
+            			<h6 class="sidebar-heading d-flex text-muted sidebarcontent">
+	              			<span>
+	              				Recently added <i class="fas fa-history"></i>
+	              			</span>
+            			</h6>
+
+            			<ul class="nav flex-column mb-2">
+              				<li class="nav-item">
+                				<a class="nav-link" href="#">
+                  					Fix number 1
+                				</a>
+              				</li>
+
+              				<li class="nav-item">
+                				<a class="nav-link" href="#">
+                  					Fix number 2
+                				</a>
+              				</li>
+              				<li class="nav-item">
+                				<a class="nav-link" href="#">
+                  					Fix number 3
+                				</a>
+              				</li>
+
+              				<li class="nav-item">
+                				<a class="nav-link" href="#">
+                  					Fix number 4
+                				</a>
+              				</li>
+            			</ul>
+          			</div>
+        		</nav>
+
+        		<main role="main" class="col-md-8">
+          			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          				<div class="col-sm-11 titlecont">
+            				<h1 class="h2 posttitle">
+            					Create New Post
+            				</h1>
+						</div>
+						<div class="btn-toolbar col-sm-1 mb-md-0 pull-right">
+              				<button class="btn btn-sm btn-primary">
+              					Upload
+              				</button>
+            			</div>
+          			</div>
+
+          			<form  method="POST">
+			  			{% csrf_token %}
+			  			<div class="container">
+			    			<div class="row">
+			        			<div id="leftNav" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			            			<div class="form-group" id="holder">
+			            				<small id="titlelabel" class="titlelabel" for="input">
+			            					Post Title
+			            				</small>
+			                			<input type="text" class="form-control inputboxes" id="input" placeholder="Something short and precise" name = "ptitle" required/>
+			            			</div>
+
+			        			</div>
+			    			</div>
+			   			</div>
+
+			  			<div class="container">
+			    			<div class="row">
+			        			<div id="leftNav" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			            			<div class="form-group">
+			            				<small id="titlelabel" class="titlelabel" for="input">
+			            					Post Description
+			            				</small>
+			                			<textarea type="text" class="form-control inputboxes" id="input" placeholder="A brief description of the error and how you're going to solve it!" rows="2" name = "pdesc" required/>
+			                			</textarea>
+			            			</div>
+			        			</div>
+			  				</div>
+			  			</div>
+
+
+			  			<div class="container pt-3">
+          					<div class="row s methodrow">
+          					<div class="container s col-md-1">
+								<div class="methodcircle">
+									<i class="fas fa-wrench"></i>
+								</div>
+							</div>
+
+          					<div class="container d-none d-lg-block s border-top border-bottom col-md-2">
+          						<h1 class="methodtitle">
+          							Method 1:
+          						</h1>
+							</div>
+
+          					<input class="form-control methodname s col-md-6" placeholder="A small name for this method"  name = "mtitle1" required/>
+
+          					<div class="container col-md-3 s pull-right align-items-center">
+          						<button class="arrowbtn s border-top border-bottom col-md-1" data-toggle="collapse" href="#collapseExample" id="arrowbtn" role="button"><i class="fas fa-angle-up js-rotate-if-collapsed"></i></button>
+          						<button onclick="descbuttonchange()" type="button" data-toggle="collapse" href="#methoddescbox" role="button" aria-expanded="false" aria-controls="methoddescbox" class="btn btn-outline-primary adddescbtn mt-2" id="adddesc" role="button"><i class='fas fa-plus'></i> Add description</button>
+
+          					</div>
+
+
+						</div>
+
+
+
+          				<form class="collapse pt-2 row methodbox show" id="collapseExample">
+			  				<div class="card card-body col-sm-12">
+
+			  					<div class="container-fluid  show methoddesccont pull-right" >
+			  						<div class="collapse row" id="methoddescbox">
+										<div id="leftNav" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			            				<div class="form-group" id="holder">
+			            					<small id="titlelabel" class="titlelabel" for="input">
+			            						Method Description
+			            					</small>
+			                				<input type="text" class="form-control inputboxes methoddescinput" id="metinput"  name = "mdesc1" required/>
+			            				</div>
+			        				</div>
+			    				</div>
+
+			  				</div>
+
+			  				<div class="container"  id="forsteps">
+			    				<div class="row pt-3 stepclass" id="stepblock" >
+          							<div class="container col-1">
+										<div class="stepcircle">
+											1
+										</div>
+									</div>
+									<div class="container border-bottom col-11">
+										<div class="row">
+						    				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						        				<div class="form-group" id="">
+						            				<small id="titlelabel" class="titlelabel" for="input">
+						            					Step 1
+						            				</small>
+						            				<textarea type="text" class="form-control inputboxes" id="input" placeholder="Here you can give a detailed explanation for this step, use bold if necessary." rows="1"  name = "s1" required/>
+						            				</textarea>
+						        				</div>
+
+						    				</div>
+										</div>
+
+
+
+
+										<!--<button class="fontStyle boldtextbtn" onclick="document.execCommand( 'bold',false,null);" title="Bold Highlighted Text"><b>B</b>
+    									</button> -->
+
+										<button onclick="removestep(this.id)" id="removebuttonid" type="button" class="btn btn-outline-secondary addstepimgbtn removestepbtn mb-2 ml-2" role="button" disabled><i class="far fa-trash-alt"></i>
+											Remove Step
+										</button>
+
+										<button type="button" class="btn btn-outline-primary addstepimgbtn mb-2" role="button"><i class="fas fa-image"></i>
+											Add Image
+										</button>
+									</div>
+
+				  				</div>
+
+          					</div>
+
+
+          					<div class="container-fluid pt-2 show methoddesccont pull-right" >
+			  					<div class="collapse row" id="notebox">
+			        				<div id="leftNav" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			            				<div class="form-group">
+			            					<small id="titlelabel" class="titlelabel" for="input">
+			            						Note:
+			            					</small>
+			                				<input type="email" class="form-control noteinput" id="noteinput">
+			            				</div>
+			        				</div>
+			  					</div>
+
+				  				<div class="collapse" id="videochoose">
+				  					<div class="container ">
+				  						<div class="form-group" id="holder">
+			            					<small id="titlelabel" class="titlelabel" for="input">
+			            						Add Video Url
+			            					</small>
+			                				<input onchange="searchvideourl()" type="email" class="form-control inputboxes" id="videourlinput" placeholder="Copy and paste the video url here">
+			            				</div>
+				  					</div>
+				  					<div class="container">
+										<div id="videocanvas" class='videocanvas' onclick='changehtml()'>
+							  			</div>
+									</div>
+			   					</div>
+
+								<div class="row">
+									<button onclick="stepadd()" type="button" class="btn btn-primary col-md-8 mt-2 mx-auto stepfinalbuttons" role="button" id="addstepbtn"><i class="fas fa-plus-circle"></i>
+									Add Step
+								</button>
+
+								<button onclick="notebtnchange()" type="button" class="btn btn-warning mt-2 mx-auto stepfinalbuttons" data-toggle="collapse" href="#notebox" role="button" id="addnote"><i class="fas fa-exclamation-triangle"></i>
+									Add Note
+								</button>
+
+								<button onclick="videobtnchange()" data-toggle="collapse" href="#videochoose" type="button" class="btn btn-dark mt-2 mx-auto stepfinalbuttons" role="button" id="addvideo"><i class="fab fa-youtube"></i>
+									Add Video
+								</button>
+							</div>
+
+
+
+
+						</div>
+
+		  			</div>
+
+						<input type = "submit" value="Upload Post">
+			  			{%if messages %}
+			  				{%for message in messages %}
+			  					<h2 style="color:green;">
+			  						{{message}}
+			  					</h2>
+			  				{% endfor %}
+			  			{% endif %}
+					</form>
+
+        		</main>
+
+				<div class="container col-md-2 pt-4">
+					<canvas class="myCanvas col-12 adcanvas ">
+					</canvas>
+				</div>
+
+      		</div>
+    	</div>
+
+
+		<header class="page-header header container-fluid">
+		</header>
+
+	</body>
+</html>
